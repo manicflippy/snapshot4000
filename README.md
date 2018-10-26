@@ -12,7 +12,11 @@ Boto3ec2 uses the configuration file created by the AWS cli .e.g
 'aws configure --profile Boto3'
 
 ## Running
-'pipenv run python ./boto3ec2.py <command> <--project=projectname>'
+'pipenv run python ./boto3ec2.py <command> <subcommand> <--project=projectname>'
 
-*command* is list, start and stop
+*command* is instances, volumes and snapshots
+*subcommand* - depends on command
+                instances - list, start, stop, create_snapshots
+                volumes - list
+                snapshots - list
 *project* is optional and works with wildcard *
