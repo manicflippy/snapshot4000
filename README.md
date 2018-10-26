@@ -7,9 +7,12 @@ Exercise in leaning basics of EC2 management with python and noto3
 
 ## Configuration
 
-Boto3ec2 uses the configuration file created by th eAWS cli .e.g
+Boto3ec2 uses the configuration file created by the AWS cli .e.g
 
 'aws configure --profile Boto3'
 
 ## Running
-'pipenv run python ./boto3ec2.py'
+'pipenv run python ./boto3ec2.py <command> <--project=projectname>'
+
+*command* is list, start and stop
+*project* is optional and works with wildcard *
