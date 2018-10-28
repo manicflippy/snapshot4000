@@ -48,8 +48,12 @@ def snapshots():
 @snapshots.command('list')
 @click.option('--project', default=None,
     help='''Only snapshots for project (tag Project:<name>) run with pipenv run "python boto3.py snapshots list --project=<name>"''')
-def list_volumes(project):
+@click.option(---all', 'list_all', default=False, is_falg=True,
+    help="List all snapshots for each volume, not just the most recent one.")
+
+def list_snapshots(project, list_all):
     "list EC2 snapshots"
+
     instances = filter_instances(project)
     for i in instances:
         for v in i.volumes.all():
@@ -63,6 +67,9 @@ def list_volumes(project):
                 s.progess,
                 s.start_time.strftime("%c")
                 )))
+                if s.state == "completed" and not list_all:
+                    break
+
     return
 ######################
 @cli.group('instances')
@@ -122,7 +129,7 @@ def stop_instances(project):
         try:
             i.stop()
         except botocore.exceptions.ClientError as e:
-            print(" Could not stop {0}.".format(i.id) as str (e))
+            print(" Could not stop {0}. ".format(i.id) as str (e))
             continue
 
     return
@@ -138,7 +145,7 @@ def start_instances(project):
         try:
             i.start()
         except botocore.exceptions.ClientError as e:
-            print(" Could not start {0}.".format(i.id) as str (e))
+            print(" Could not start {0}. ".format(i.id) as str (e))
             continue
     return
 #########################
