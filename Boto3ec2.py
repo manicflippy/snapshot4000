@@ -76,9 +76,18 @@ def create_snapshots(project):
     "create snapshots of EC2 instances"
     instances = filter_instances(project)
     for i in instances:
+            print("Stopping {0}...".format(i.id))
+            i.stop()
+            i.wait_until_stopped()
+            print("{0} stopped".format(i.id))
             for v in i.volumes.all():
-                print("Creating snapshot of {0}...".format(v.id))
+                print(" Creating snapshot of {0}...".format(v.id))
                 v.create_snapshot(Description="Created by Boto3EC2.py")
+            print("Starting {0}...".format(i.id))
+            i.start()
+            i.wait_until_running()
+            print("{0} started".format(i.id))
+    print("Job Done!")
     return
 
 
