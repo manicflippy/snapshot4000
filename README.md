@@ -15,8 +15,10 @@ Boto3ec2 uses the configuration file created by the AWS cli .e.g
 'pipenv run python ./boto3ec2.py <command> <subcommand> <--project=projectname>'
 
 *command* is instances, volumes and snapshots
-\n *subcommand* - depends on command
+
+*subcommand* - depends on command
                 instances - list, start, stop, create_snapshots
                 volumes - list
                 snapshots - list
-\n *project* is optional and works with wildcard *
+
+*project* is optional and works with wildcard *
